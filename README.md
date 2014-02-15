@@ -14,6 +14,8 @@ Small wrapper around Google Cloud Messaging
  GCM gcm = new GCM(this);
 ```
 
+---
+
 * In manifest, you must add following permissions, and be careful with latest permission and read comment above it:
 
 ```xml
@@ -41,21 +43,25 @@ and above of the closing application tag (</application>) add following:
 <!-- It must be in your package! -->
 <service android:name=".GCMIntentService" />
 ```
+
+---
+
 * In Parameters.java edit following:
 ```java
     public static final String SERVER_URL = "http://yurapp.com/gcm";
     public static final String SENDER_ID = "11111111";
+    public static final boolean UPDATE_PUSH_MESSAGE = false;
 ```
-Where SERVER_URL is URL to the server script that should receive device's registrationId, and SENDER_ID is id you got after registering app on google developers portal (also known as Project Number).
+Where SERVER_URL is URL to the server script that should receive device's registrationId, and SENDER_ID is id you got after registering app on google developers portal (also known as Project Number), and UPDATE_PUSH_MESSAGE decide would you like to have only one notification (agregated) or all notifications, if they arive before user reads it.
 
+---
 
+* In class ProcessMessage.java you can define in details how you would like your notification behave. 
 
+---
 
-
-
-
-
-If you want to test application, start following script:
+* If you want to test application, start following script on your server or local machine:
+ 
 ```php
 
 <?php
@@ -114,3 +120,6 @@ echo $result;
 
 ```
 
+---
+
+> ### If you want to change information that server script will send to devices, you must change ProcessMessage.java class to handle that changes
