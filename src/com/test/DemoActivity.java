@@ -50,23 +50,6 @@ public class DemoActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            /*
-             * Typically, an application registers automatically, so options
-             * below are disabled. Uncomment them if you want to manually
-             * register or unregister the device (you will also need to
-             * uncomment the equivalent options on options_menu.xml).
-             */
-            /*
-            case R.id.options_register:
-                GCMRegistrar.register(this, SENDER_ID);
-                return true;
-            case R.id.options_unregister:
-                GCMRegistrar.unregister(this);
-                return true;
-             */
-            case R.id.options_clear:
-                mDisplay.setText(null);
-                return true;
             case R.id.options_exit:
                 finish();
                 return true;

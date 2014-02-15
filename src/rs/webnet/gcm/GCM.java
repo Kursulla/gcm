@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.google.android.gcm.GCMRegistrar;
 
@@ -35,7 +34,7 @@ public class GCM {
         CommonUtilities.checkNotNull(Parameters.SENDER_ID, "SENDER_ID");
 
         final String regId = GCMRegistrar.getRegistrationId(context);
-        Log.d(TAG, "regId = " + regId);
+        BLog.d(TAG, "regId = " + regId,con);
 
         if (regId.equals("")) {
             // Automatically registers application on startup.
@@ -73,7 +72,7 @@ public class GCM {
                     @Override
                     public void onReceive(Context context, Intent intent) {
                         String newMessage = intent.getExtras().getString(EXTRA_MESSAGE);
-                        Log.d(TAG,"handleMessageReceiver::onReceive->"+newMessage);
+                        BLog.d(TAG,"handleMessageReceiver::onReceive->"+newMessage,context);
                     }
                 };
     }

@@ -17,6 +17,7 @@ package rs.webnet.gcm;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 
 /**
  * Helper class providing methods and constants common to other classes in the
@@ -47,5 +48,9 @@ public final class CommonUtilities {
         if (reference == null) {
             throw new NullPointerException("Null is "+name);
         }
+    }
+
+    public static boolean isDebug(Context context){
+        return (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
     }
 }

@@ -49,7 +49,7 @@ public final class ServerUtilities {
      * @return whether the registration succeeded or not.
      */
     public static boolean register(final Context context, final String regId) {
-        Log.i(TAG, "registering device (regId = " + regId + ")");
+        BLog.i(TAG, "registering device (regId = " + regId + ")",context);
         String serverUrl = Parameters.SERVER_URL + "/register";
         Map<String, String> params = new HashMap<String, String>();
         params.put("regId", regId);
@@ -58,7 +58,7 @@ public final class ServerUtilities {
         // demo server. As the server might be down, we will retry it a couple
         // times.
         for (int i = 1; i <= MAX_ATTEMPTS; i++) {
-            Log.d(TAG, "Attempt #" + i + " to register");
+            BLog.d(TAG, "Attempt #" + i + " to register",context);
             try {
 //                displayMessage(context, context.getString( R.string.server_registering, i, MAX_ATTEMPTS));
                 post(serverUrl, params);
@@ -75,11 +75,11 @@ public final class ServerUtilities {
                     break;
                 }
                 try {
-                    Log.d(TAG, "Sleeping for " + backoff + " ms before retry");
+                    BLog.d(TAG, "Sleeping for " + backoff + " ms before retry",context);
                     Thread.sleep(backoff);
                 } catch (InterruptedException e1) {
                     // Activity finished before we complete - exit.
-                    Log.d(TAG, "Thread interrupted: abort remaining retries!");
+                    BLog.d(TAG, "Thread interrupted: abort remaining retries!",context);
                     Thread.currentThread().interrupt();
                     return false;
                 }
@@ -97,7 +97,7 @@ public final class ServerUtilities {
      * Unregister this account/device pair within the server.
      */
     public static void unregister(final Context context, final String regId) {
-        Log.i(TAG, "unregistering device (regId = " + regId + ")");
+        BLog.i(TAG, "unregistering device (regId = " + regId + ")",context);
         String serverUrl = Parameters.SERVER_URL + "/unregister";
         Map<String, String> params = new HashMap<String, String>();
         params.put("regId", regId);
@@ -146,7 +146,7 @@ public final class ServerUtilities {
             }
         }
         String body = bodyBuilder.toString();
-        Log.v(TAG, "Posting '" + body + "' to " + url);
+//        Log.d(TAG, "Posting '" + body + "' to " + url);
         byte[] bytes = body.getBytes();
         HttpURLConnection conn = null;
         try {
@@ -155,8 +155,7 @@ public final class ServerUtilities {
             conn.setUseCaches(false);
             conn.setFixedLengthStreamingMode(bytes.length);
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type",
-                    "application/x-www-form-urlencoded;charset=UTF-8");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
             // post the request
             OutputStream out = conn.getOutputStream();
             out.write(bytes);
