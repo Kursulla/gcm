@@ -26,7 +26,7 @@ import rs.webnet.gcm.GCM;
 
 
 public class DemoActivity extends Activity {
-    private GCM gcm;
+//    private GCM gcm;
     private static final String TAG = "DemoActivity";
     TextView mDisplay;
 
@@ -36,7 +36,9 @@ public class DemoActivity extends Activity {
         setContentView(R.layout.main);
 
         mDisplay = (TextView) findViewById(R.id.display);
-        gcm = new GCM(this);
+
+
+        GCM gcm = new GCM(this);
 
     }
 
@@ -60,11 +62,7 @@ public class DemoActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-//        if (gcm.getRegisterTask() != null) {
-//            gcm.getRegisterTask().cancel(true);
-//        }
-//        unregisterReceiver(gcm.getHandleMessageReceiver());
-//        GCMRegistrar.onDestroy(this);
+
         super.onDestroy();
     }
 }

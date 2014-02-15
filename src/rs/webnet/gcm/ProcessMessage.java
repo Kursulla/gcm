@@ -33,7 +33,7 @@ public class ProcessMessage {
      * Issues a notification to inform the user that server has sent a message.
      */
     private static void generateNotification(Context context, PushMsg pushMsg) {
-//        int icon = R.drawable.ic_stat_gcm;
+
         long when = System.currentTimeMillis();
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = new Notification(pushMsg.icon, pushMsg.message, when);
@@ -53,6 +53,8 @@ public class ProcessMessage {
         }
 
     }
+
+
     private static class PushMsg{
         public String title;
         public String message;
